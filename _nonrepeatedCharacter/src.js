@@ -40,5 +40,5 @@ var firstNonRepeatedCharacter = function(string) {
     }
   }
   //return empty string if no such character exists
-  return '';
+  return null;
 };

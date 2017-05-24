@@ -11,10 +11,17 @@ describe('firstNonRepeatedCharacter', function() {
     expect(1).to.equal(1);
   });
 
-  it('should return an empty string when there are no nonrepeated characters', function() {
+  it('should return null when passed an empty string', function() {
+    testString = '';
+    result = firstNonRepeatedCharacter(testString);
+    expected = null;
+    expect(result).to.equal(expected);
+  });
+
+  it('should return null when there are no nonrepeated characters', function() {
     testString = 'ABCABC';
     result = firstNonRepeatedCharacter(testString);
-    expected = '';
+    expected = null;
     expect(result).to.equal(expected);
   });
 
