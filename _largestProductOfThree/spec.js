@@ -19,7 +19,7 @@ describe('largestProductOfThree', function() {
     expect(result).to.equal(6);
   });
 
-  it('should handle negaitve numbers by absolute value', function(){
+  it('should handle negaitve numbers', function(){
     result = largestProductOfThree([2, 3, -10, 7, 5, -20]);
     expect(result).to.equal(1400);
     result = largestProductOfThree([-31, 41, 34, -37, -17, 29]);
