@@ -16,32 +16,34 @@
   //The array will only contain numbers and
     //the target will be a number
 var binarySearch = function (array, target) {
-  var previousIndex = 0;
-  var calculatedIndex = 0;
+  var minIndex = 0;
+  var maxIndex = array.length - 1;
   var currentIndex = 0;
 
-  //initial calculated index
-  calculatedIndex = Math.round((array.length - 1) / 2);
-  //update currentIndex
-  currentIndex = calculatedIndex;
+  //initial currentIndex
+  currentIndex = Math.floor((maxIndex - minIndex) / 2);
 
-  var findTarget = function() {
+  //inner function
+  var findIndex = function() {
+    //if the currentIndex's value equals the target
     if (array[currentIndex] === target) {
+      //return the current index
       return currentIndex;
-    } else if (previousIndex === currentIndex) {
+    }
+    else if ((currentIndex === maxIndex) || (currentIndex === minIndex)) {
       return null;
+    //else if currentIndex's value is less than the target
     } else if (array[currentIndex] < target) {
-      calculatedIndex = Math.round((currentIndex - 1) / 2);
-      previousIndex = currentIndex;
-      currentIndex = calculatedIndex;
-      return findTarget();
+      minIndex = currentIndex;
+      currentIndex += Math.ceil((maxIndex - currentIndex) / 2);
+      return findIndex();
+    //else if currentIndex's value is greater than the target
     } else if (array[currentIndex] > target) {
-      calculatedIndex = Math.round((array.length - currentIndex - 1) / 2);
-      previousIndex = currentIndex;
-      currentIndex += calculatedIndex;
-      return findTarget();
+      maxIndex =  currentIndex;
+      currentIndex = Math.floor((currentIndex - minIndex) / 2);
+      return findIndex();
     }
   }
   //return the result of the inner function
-  return findTarget();
+  return findIndex();
 };
