@@ -34,8 +34,7 @@
 'use strict';
 
 var callApply = function(func, args) {
-  if ((Array.isArray(args)) ||
-    ((args.length) && (typeof args !== 'string') && (typeof args !== 'function'))) {
+  if ((args.length) && (typeof args !== 'string') && (typeof args !== 'function')) {
     return func.apply(null, args);
   } else {
     return func.call(null, args);
