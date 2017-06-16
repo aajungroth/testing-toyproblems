@@ -11,6 +11,12 @@ describe('balancedParens', function() {
     expect(1).to.equal(1);
   });
 
+  it('should return true for empty string', function() {
+    result0 = balancedParens(''); // true
+    expected = true;
+    expect(result0).to.equal(expected);
+  });
+
   it('should return true for balanced parens', function() {
     result0 = balancedParens('()'); // true
     result1 = balancedParens('(())');  // true

@@ -46,7 +46,7 @@ var balancedParens = function(input) {
   });
   //if the array is empty
   if (characters.length <= 0) {
-    return false
+    return true;
   }
   //iterate on the arrray
   for (var i = 0; i < characters.length; i++) {
@@ -63,7 +63,7 @@ var balancedParens = function(input) {
       if(!((topParen === '(') && (characters[i] === ')')) &&
         !((topParen === '[') && (characters[i] === ']')) &&
         !((topParen === '{') && (characters[i] === '}'))) {
-        return false
+        return false;
       }
     }
   }

@@ -111,12 +111,20 @@ Range.prototype.each = function (callback) {
       }
     }
   } else {
-    if (this.start <= this.end) {
+    if ((this.start <= this.end) && (this.step > 0)) {
       for (var i = this.start; i <= this.end; i += this.step) {
         callback(i);
       }
-    } else {
+    } else if ((this.start > this.end) && (this.step > 0)) {
       for (var i = this.start; i >= this.end; i -= this.step) {
+        callback(i);
+      }
+    } else if ((this.start <= this.end) && (this.step < 0)) {
+      for (var i = this.end; i >= this.start; i += this.step) {
+        callback(i);
+      }
+    } else if ((this.start > this.end) && (this.step < 0)) {
+      for (var i = this.start; i >= this.end; i += this.step) {
         callback(i);
       }
     }
@@ -130,51 +138,24 @@ Range.prototype.includes = function (val) {
     return this.start === val;
   } else if ((this.step === null) && (this.start <= this.end)) {
     if ((val >= this.start) && (val <= this.end)) {
-      for (var i = this.start; i <= this.end; i++) {
-        if (val === i) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      return false;
+      return true;
     }
   } else if ((this.step === null) && (this.start > this.end)) {
     if ((val <= this.start) && (val >= this.end)) {
-      for (var i = this.start; i >= this.end; i--) {
-        if (val === i) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      return false;
+      return true;
     }
   } else {
     if (this.start <= this.end) {
       if ((val >= this.start) && (val <= this.end)) {
-        for (var i = this.start; i <= this.end; i += this.start) {
-          if (val === i) {
-            return true;
-          }
-        }
-        return false;
-      } else {
-        return false;
+        return val % this.step === 0;
       }
     } else {
       if ((val <= this.start) && (val >= this.end)) {
-        for (var i = this.start; i >= this.end; i -= this.start) {
-          if (val === i) {
-            return true;
-          }
-        }
-        return false;
-      } else {
-        return false;
+        return val % this.step === 0;
       }
     }
   }
+  return false;
 };
 
 var range = new Range(1);
