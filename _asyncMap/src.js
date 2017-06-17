@@ -44,34 +44,22 @@
 //edge cases the results array must be popluated in
   //the order the tasks were inputted to asyncMap
 var asyncMap = function(tasks, callback) {
-  //array of tasks
-  var tasks = Array.prototype.slice.call(arguments[0]);
-  console.log(tasks);
-  //task counter
-  var taskCounter = 0;
-  //array of results
   var results = [];
-  //cb for tasks
-  var taskCb = function (result) {
-    //push task result to array of results
-    results.push(result);
-    //increment count
-    taskCounter++;
-      //if next task exists
-      if (tasks[taskCounter]) {
-        //invokes the next task with this cb
-        tasks[taskCounter](taskCb);
-      } else {
-        //call back for async map with arry of results
+  var taskCounter = 0;
+
+  //iterate through all of the tasks
+  tasks.forEach(function(task, i) {
+    //run the task with a call back that takes a result
+    task(function(result) {
+      //save the result a the current index in a results array
+      results[i] = result;
+      //increment a counter for the amount of tasks run
+      taskCounter++;
+      //if the counter is greater than or equal to the number of tasks
+      if (taskCounter >= tasks.length) {
+        //run the asyncMap callback with the results array
         callback(results);
       }
-  }
-
-  //if first taks exists
-  if (tasks[taskCounter]) {
-    //function 1 runs with call back
-      //after some time
-        //excutes call back
-    tasks[taskCounter](taskCb);
-  }
+    });
+  });
 };
