@@ -19,10 +19,10 @@ var multiply = function(x, y) {
   var isNegative = false;
 
   if ((x < 0) && (y < 0)) {
-    x *= -1;
-    y *= -1;
+    x = Math.abs(x);
+    y = Math.abs(y);
   } else if ((x >= 0) && (y < 0)) {
-    y *= -1;
+    y = Math.abs(y);
     isNegative = true;
   }
   for (var i = 0; i < y; i++) {
@@ -48,13 +48,13 @@ var divide = function(x, y) {
   var isNegative = false;
 
   if ((x < 0) && (y < 0)) {
-    x *= -1;
-    y *= -1;
+    x = Math.abs(x);
+    y = Math.abs(y);
   } else if ((x < 0) && (y >= 0)) {
-    x *= -1;
+    x = Math.abs(x);
     isNegative = true;
   } else if ((x >= 0) && (y < 0)) {
-    y *= -1;
+    y = Math.abs(y);
     isNegative = true;
   }
   if (y === 0) {
@@ -62,12 +62,12 @@ var divide = function(x, y) {
   }
   do {
     quotient = 0;
-    dividend = x * place;
+    dividend = multiply(x, place);
     while (dividend >= y) {
       quotient++;
       dividend -= y;
     }
-    place *= 10;
+    place = multiply(place, 10);
   } while (dividend !== 0 && place <= 1000);
   if (dividend !== 0) {
     quotient++;
